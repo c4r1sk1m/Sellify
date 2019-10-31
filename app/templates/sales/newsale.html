@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+
+{% block app_content %}
+
+<h1>
+    Create a new sale
+</h1>
+<form action="" method="POST">
+    {{form.hidden_tag()}}
+    <p>
+        {{form.name.label}} <br>
+        {{form.name(cols=32,rows=4)}}<br>
+
+        {{form.description.label}} <br>
+        {{form.description(cols=32,rows=4)}}<br>
+
+        {{form.zipcode.label}} <br>
+        {{form.zipcode(cols=32,rows=4)}}<br>
+
+        {{form.address_1.label}} <br>
+        {{form.address_1(cols=32,rows=4)}}<br>
+
+        {{form.address_2.label}} <br>
+        {{form.address_2(cols=32,rows=4)}}<br>
+
+        {{form.start_date.label}} <br>
+        {{form.start_date(cols=32,rows=4)}}<br>
+
+        {{form.end_date.label}} <br>
+        {{form.end_date(cols=32,rows=4)}}<br>
+
+        
+    </p>
+    <p>{{form.submit()}}</p>
+
+</form>
+
+
+
+
+
+
+
+{% endblock %}

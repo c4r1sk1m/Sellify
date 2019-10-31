@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block app_content %}
+    <div class="container">
+        <h1>
+            {{ sale.name }}
+        </h1>
+        {% if sale.user_id == user.id %}
+            <a href="{{ url_for('add_items',id=sale.id) }}">Add Items to Sale</a>
+        {% endif %}
+    </div>
+    <div class="container">
+        <h2>Items for sale</h2>
+        {% for item in items %}
+            {% include '/sales/_item.html' %}
+        {% endfor %}
+
+    </div>
+{% endblock %}

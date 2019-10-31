@@ -1,0 +1,8 @@
+<table>
+        <tr valign="top">
+            <td><img src="{{ sale.seller.avatar(36) }}"></td>
+            <td> {{ sale.seller.username }} Listed: 
+                <a href="{{ url_for('sale',id=sale.id) }}"><b>{{ sale.name }}</b> </a>
+            </td>
+        </tr>
+</table>
