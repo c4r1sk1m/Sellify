@@ -1,53 +1,94 @@
-{% extends 'bootstrap/base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
-{% block title %}
-    {% if title %}{{ title }} - Sellify{% else %}Welcome to Sellify{% endif %}
-{% endblock %}
+<!DOCTYPE html>
+<!-- saved from url=(0090)https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/examples/starter-template/# -->
+<html lang="en" class="gr__fezvrasta_github_io">
 
-{% block navbar %}
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url_for('index') }}">Sellify</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('search') }}">Sales</a></li>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="https://fezvrasta.github.io/bootstrap-material-design/favicon.ico"> -->
+
+    <title>{% if title %}{{ title }} - Sellify{% else %}Welcome to Sellify{% endif %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap-material-design.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/starter-template.css" rel="stylesheet">
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand"
+            href="https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/examples/starter-template/#">Sellify</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                        href="{{ url_for('index') }}">Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                        href="{{ url_for('search') }}">Search</a>
+                </li>
+
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_anonymous %}
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                {% else %}
-                <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
-                <li><a href="{{ url_for('create_sale') }}">New Sale</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                {% endif %}
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav  navbar-right ">
+                    {% if current_user.is_anonymous %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('create_sale') }}">New Sale</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                    {% endif %}
             </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 
-{% endblock %}
+    <main role="main" class="container">
 
-{% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
+        {% block content %}
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
             {% for message in messages %}
             <div class="alert alert-info" role="alert">{{ message }}</div>
             {% endfor %}
-        {% endif %}
-        {% endwith %}
+            {% endif %}
+            {% endwith %}
 
-        {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
-    </div>
-{% endblock %}
+            {# application content needs to be provided in the app_content block #}
+            {% block app_content %}{% endblock %}
+        </div>
+        {% endblock %}
+
+    </main><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery-3.3.1.slim.min.js.download"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="/static/js/popper.min.js.download"></script>
+    <script src="/static/js/bootstrap-material-design.min.js.download"></script>
+
+
+</body>
+
+</html>
