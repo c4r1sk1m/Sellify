@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template,flash,redirect,url_for,request
+from flask import render_template,flash,redirect,url_for,request, jsonify
 # Import Forms
 from app.forms import LoginForm,RegistrationForm,EditProfileForm,SaleForm,ItemForm
 # Import Login Related packages
@@ -10,6 +10,16 @@ from app.models import User,Sale,Item
 from werkzeug.urls import url_parse
 # Datetime
 from datetime import datetime
+
+import requests
+
+# Image Library
+import imghdr
+
+# Mapping Libraries
+from googlemaps import Client as GoogleMaps
+import pandas as pd 
+
 
 # -------------------------------- Before Request ----------------------------------- #
 @app.before_request
@@ -61,8 +71,10 @@ def sale(id):
 
     items = sale.items
 
+    map = map_results(sale.address_1, sale.address_2, sale.zipcode)
 
-    return render_template('/sales/sale.html',sale=sale,items=items,user=current_user)
+
+    return render_template('/sales/sale.html',sale=sale,items=items,user=current_user, map=map)
 
 
 @app.route('/sale/<id>/item',methods=['GET','POST'])
@@ -107,6 +119,25 @@ def create_sale():
     
     return render_template('/sales/newsale.html',form=form)
 
+# -------------------------------- Mapping ---------------------------------------- #
+def map_results(address_1,address_2,zipcode):
+    key = 'AIzaSyC8K_D77-BvH6JwBGy1OiVaYzhEwerxAVY'
+    gmaps =  GoogleMaps(key)
+
+    addresses = '11 Wisteria Dr Apt 3S, Fords, NJ 08863, USA'
+    geocode_result = gmaps.geocode(addresses)
+    latitude =  str(geocode_result[0]['geometry']['location'] ['lat'])
+    longitude = str(geocode_result[0]['geometry']['location']['lng'])
+    print(latitude,longitude)
+
+    map_string =  "<img src='https://maps.googleapis.com/maps/api/staticmap?center="+latitude+","+longitude+"&zoom=13&size=400x400&markers=color:blue%7Clabel:Sale%7C"+latitude+","+longitude+"&key=AIzaSyC8K_D77-BvH6JwBGy1OiVaYzhEwerxAVY'/>"
+    print(map_string)
+    return map_string
+
+
+
+
+
 # -------------------------------- USER Management -------------------------------- #
 # Edit Profile
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -145,6 +176,7 @@ def login():
 
         return redirect(next_page)
     return render_template('login.html',title='Sign in',form=form)
+
 
 # User Registration
 @app.route('/register',methods=['GET','POST'])

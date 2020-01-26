@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% block app_content %}
     <div class="container">
         <h1>
@@ -9,6 +9,9 @@
         {% if sale.user_id == user.id %}
             <a href="{{ url_for('add_items',id=sale.id) }}">Add Items to Sale</a>
         {% endif %}
+    </div>
+    <div class="map">
+        {{ map | safe }}
     </div>
     <div class="container">
         <h2>Items for sale</h2>
