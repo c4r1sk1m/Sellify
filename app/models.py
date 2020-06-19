@@ -18,6 +18,14 @@ class User(UserMixin,db.Model):
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
+    # Address for sale posting will be pulled directly from the the User profile.
+    address_1   = db.Column(db.String(140))
+    address_2   = db.Column(db.String(140))
+    country     = db.Column(db.String(140))
+    state       = db.Column(db.String(140))
+    postal_code = db.Column(db.String(10))
+
+
     # Database Relationship with Sales
     sales = db.relationship('Sale',backref='seller',lazy='dynamic')
     

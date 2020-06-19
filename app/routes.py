@@ -100,16 +100,40 @@ def add_items(id):
 def create_sale():
     form = SaleForm()
 
+    address_1 = current_user.address_1
+    address_saved = False
+    if address_1 == None:
+        print("NONE")
+    else:
+        address_saved = True
+
+
+    # Use home address?
+    # Yes -> Sale Address = current_user.*
+    # No -> Sale Address =  Input
+
+    # If No Address found on File for user Force User to input new address
+    # If No Address is found, prompt user for input on whether or not they want to set the address they just entered as their default home address.
+
     if form.validate_on_submit():
         name = form.name.data
         description = form.description.data
-        zipcode = form.zipcode.data
+        zipcode = form.postal_code.data
         address_1 = form.address_1.data
         address_2 = form.address_2.data
         start_date = form.start_date.data
         end_date =  form.end_date.data
         user_id = current_user.id
         sale = Sale(name=name,description=description,zipcode=zipcode,address_1=address_1,address_2=address_2,start_date=start_date,end_date=end_date,user_id=user_id)
+
+        if form.save_address.data == True:
+            current_user.address_1 = form.address_1.data
+            current_user.address_2 = form.address_2.data
+            current_user.country =form.country.data
+            current_user.state =form.state.data
+            current_user.postal_code =postal_code =  form.postal_code.data
+
+
         db.session.add(sale)
         db.session.commit()        
  
@@ -117,7 +141,7 @@ def create_sale():
     else:
         pass
     
-    return render_template('/sales/newsale.html',form=form)
+    return render_template('/sales/newsale.html',form=form,address_saved=address_saved)
 
 # -------------------------------- Mapping ---------------------------------------- #
 def map_results(address_1,address_2,zipcode):

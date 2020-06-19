@@ -15,14 +15,37 @@
         {{form.description.label}} <br>
         {{form.description(cols=32,rows=4)}}<br>
 
-        {{form.zipcode.label}} <br>
-        {{form.zipcode(cols=32,rows=4)}}<br>
+       {% if address_saved %}
+        {{form.use_saved_address.label}} <br>
+        {{form.use_saved_address(cols=32,rows=4)}}<br>
+
+      {% else%}
+        {{form.save_address.label}} <br>
+        {{form.save_address(cols=32,rows=4)}}<br>
+       {% endif %}
+
+
+        {{form.postal_code.label}} <br>
+        {{form.postal_code(cols=32,rows=4)}}<br>
 
         {{form.address_1.label}} <br>
         {{form.address_1(cols=32,rows=4)}}<br>
 
         {{form.address_2.label}} <br>
         {{form.address_2(cols=32,rows=4)}}<br>
+
+        
+        {{form.country.label}} <br>
+        {{form.country(cols=32,rows=4)}}<br>
+        
+        {{form.state.label}} <br>
+        {{form.state(cols=32,rows=4)}}<br>
+
+        {% if address_saved %}
+
+
+        {% endif %}
+
 
         {{form.start_date.label}} <br>
         {{form.start_date(cols=32,rows=4)}}<br>
@@ -35,6 +58,7 @@
     <p>{{form.submit()}}</p>
 
 </form>
+
 
 
 

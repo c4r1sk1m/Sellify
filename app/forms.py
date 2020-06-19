@@ -7,6 +7,12 @@ from app.models import User
 
 
 
+# ToDo:
+# 1. Form input validation
+# 2. Form input sanitation
+# 
+# 
+
 
 class ItemForm(FlaskForm):
     name = name  = StringField('Item Name', validators=[DataRequired(), Length(min=1,max=140)])
@@ -17,9 +23,19 @@ class ItemForm(FlaskForm):
 class SaleForm(FlaskForm):
     name  = StringField('Sale name', validators=[DataRequired(), Length(min=1,max=140)])
     description = TextAreaField('Describe your sale!', validators=[DataRequired(), Length(min=1, max=512)])
-    zipcode = StringField('Zipcode', validators=[DataRequired()])
-    address_1 = StringField('Address Line 1', validators=[DataRequired()])
-    address_2 = StringField('Address Line 2', validators=[DataRequired()])
+
+
+    use_saved_address = BooleanField('Use Saved Home Address?')
+    save_address      = BooleanField('Save Address to Profile?')
+
+
+    address_1   = StringField('Address Line 1', validators=[DataRequired()])
+    address_2   = StringField('Address Line 2')
+    country     = StringField('Country', validators=[DataRequired()])
+    state       = StringField('State', validators=[DataRequired()])
+    postal_code = StringField('Postal Code', validators=[DataRequired()])
+
+
     start_date = StringField('Start Date', validators=[DataRequired()])
     end_date = StringField('End Date', validators=[DataRequired()])
     submit = SubmitField('Submit')
@@ -52,6 +68,15 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
+
+    address_1   = StringField('Address Line 1', validators=[DataRequired()])
+    address_2   = StringField('Address Line 2')
+    country     = StringField('Country', validators=[DataRequired()])
+    state       = StringField('State', validators=[DataRequired()])
+    postal_code = StringField('Postal Code', validators=[DataRequired()])
+
+
+
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
