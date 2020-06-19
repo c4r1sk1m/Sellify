@@ -145,10 +145,10 @@ def create_sale():
 
 # -------------------------------- Mapping ---------------------------------------- #
 def map_results(address_1,address_2,zipcode):
-    key = 'AIzaSyC8K_D77-BvH6JwBGy1OiVaYzhEwerxAVY'
+    key = ''
     gmaps =  GoogleMaps(key)
 
-    addresses = '11 Wisteria Dr Apt 3S, Fords, NJ 08863, USA'
+    addresses = ''
     geocode_result = gmaps.geocode(addresses)
     latitude =  str(geocode_result[0]['geometry']['location'] ['lat'])
     longitude = str(geocode_result[0]['geometry']['location']['lng'])
