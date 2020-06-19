@@ -154,7 +154,7 @@ def map_results(address_1,address_2,zipcode):
     longitude = str(geocode_result[0]['geometry']['location']['lng'])
     print(latitude,longitude)
 
-    map_string =  "<img src='https://maps.googleapis.com/maps/api/staticmap?center="+latitude+","+longitude+"&zoom=13&size=400x400&markers=color:blue%7Clabel:Sale%7C"+latitude+","+longitude+"&key=AIzaSyC8K_D77-BvH6JwBGy1OiVaYzhEwerxAVY'/>"
+    map_string =  "<img src='https://maps.googleapis.com/maps/api/staticmap?center="+latitude+","+longitude+"&zoom=13&size=400x400&markers=color:blue%7Clabel:Sale%7C"+latitude+","+longitude+"&key="+key+"'/>"
     print(map_string)
     return map_string
 
